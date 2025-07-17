@@ -75,12 +75,11 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-poppins font-bold leading-tight animate-bounce-in">
-            <span className="block">ReferralBoost is</span>
-            <span className="block text-gradient bg-gradient-to-r from-accent to-primary-glow bg-clip-text text-[#e0f0ff]">
-              Launching Soon 🚀
-            </span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}>
+            <span>ReferralBoost is</span>
+            <span className="block text-white">Launching Soon 🚀</span>
           </h1>
+
 
           <p className="text-xl md:text-2xl lg:text-3xl font-inter font-light opacity-90 max-w-3xl mx-auto animate-bounce-in" style={{ animationDelay: '0.2s' }}>
             Be the first to know and get exclusive early bird offers!
