@@ -46,13 +46,20 @@ exports.handler = async (event) => {
       };
     }
 
-    // Send confirmation email
-    await resend.emails.send({
-      from: 'Referral Boost <boost2hire@gmail.com>',
+    // ✅ Send confirmation email
+    const emailResponse = await resend.emails.send({
+      from: 'Referral Boost <onboarding@resend.dev>', // or your verified domain
       to: email,
       subject: 'Thank you for signing up!',
       html: `<strong>You're on the list!</strong><br>Thanks for joining our early access launch.`,
     });
+
+    if (emailResponse.error) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Email not sent: ' + emailResponse.error.message }),
+      };
+    }
 
     return {
       statusCode: 200,
