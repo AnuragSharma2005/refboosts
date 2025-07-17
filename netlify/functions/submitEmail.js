@@ -28,6 +28,14 @@ exports.handler = async (event) => {
       .insert([{ email }]);
 
     if (error) {
+      if (error.code === '23505') {
+        // Duplicate email (unique constraint violation)
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ message: 'Thanks, you have already added your email ID!' }),
+        };
+      }
+
       return {
         statusCode: 500,
         body: JSON.stringify({ error: 'Failed to insert email: ' + error.message }),
