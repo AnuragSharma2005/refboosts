@@ -1,14 +1,11 @@
-import { createClient } from '@supabase/supabase-js';
-console.log("Supabase loaded!", createClient);
+const { createClient } = require('@supabase/supabase-js');
 
-// Initialize Supabase client with anon key
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.VITE_SUPABASE_ANON_KEY
+  process.env.SUPABASE_ANON_KEY
 );
 
 exports.handler = async (event) => {
-  // Only accept POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
