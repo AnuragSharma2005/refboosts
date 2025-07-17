@@ -46,12 +46,29 @@ exports.handler = async (event) => {
       };
     }
 
-    // ✅ Send confirmation email
+    // ✅ Send confirmation email with formal, emotional message
     const emailResponse = await resend.emails.send({
-      from: 'Referral Boost <onboarding@resend.dev>', // or your verified domain
+      from: 'Referral Boost <onboarding@resend.dev>', // Replace with your verified domain address
       to: email,
-      subject: 'Thank you for signing up!',
-      html: `<strong>You're on the list!</strong><br>Thanks for joining our early access launch.`,
+      subject: "You're officially on the waitlist for Referral Boost 🚀",
+      html: `
+        <h2>Thank you for signing up!</h2>
+        <p>
+          We're thrilled to welcome you to <strong>Referral Boost</strong>.
+        </p>
+        <p>
+          Your interest means a lot to us. You're now officially on our early access list, and we're working hard behind the scenes to bring you something truly valuable.
+        </p>
+        <p>
+          Our team will reach out to you personally very soon with more updates and early access details. You're not just a subscriber — you're a part of our journey from day one, and we couldn't be more grateful.
+        </p>
+        <p>
+          If you have any questions or suggestions in the meantime, feel free to reply to this email.
+        </p>
+        <br>
+        <p>Warm regards,</p>
+        <p><strong>The Referral Boost Team</strong></p>
+      `
     });
 
     if (emailResponse.error) {
