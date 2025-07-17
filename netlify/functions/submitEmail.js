@@ -31,20 +31,27 @@ exports.handler = async (event) => {
       .from('early_signups')
       .insert([{ email }]);
 
-    // If email already exists
-    if (error && error.message.includes('duplicate key value')) {
+    // If email already exists (Postgres unique constraint error)
+    if (error && error.code === '23505') {
       return {
         statusCode: 200,
         body: JSON.stringify({ message: 'Thanks, you have already added your email ID!' }),
       };
     }
 
+    if (error) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Failed to insert email: ' + error.message }),
+      };
+    }
+
     // Send confirmation email
     await resend.emails.send({
-      from: 'Your Project <noreply@yourdomain.com>',
+      from: 'Referral Boost <boost2hire@gmail.com>',
       to: email,
       subject: 'Thank you for signing up!',
-      html: `<strong>You're on the list!</strong><br>Thanks for joining our early launch.`,
+      html: `<strong>You're on the list!</strong><br>Thanks for joining our early access launch.`,
     });
 
     return {
