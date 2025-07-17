@@ -1,4 +1,5 @@
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
+console.log("Supabase loaded!", createClient);
 
 // Initialize Supabase client with anon key
 const supabase = createClient(
