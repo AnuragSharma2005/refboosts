@@ -17,7 +17,17 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { email } = JSON.parse(event.body || '{}');
+    let email;
+
+try {
+  const body = JSON.parse(event.body);
+  email = body.email;
+} catch (parseErr) {
+  return {
+    statusCode: 400,
+    body: JSON.stringify({ error: 'Invalid or missing JSON body' }),
+  };
+}
 
     if (!email || typeof email !== 'string' || !email.includes('@')) {
       return {
@@ -60,7 +70,7 @@ exports.handler = async (event) => {
           Your interest means a lot to us. You're now officially on our early access list, and we're working hard behind the scenes to bring you something truly valuable.
         </p>
         <p>
-          Our team will reach out to you personally very soon with more updates and early access details. You're not just a subscriber — you're a part of our journey from day one, and we couldn't be more grateful.
+          Our team will reach out to you personally very soon with more updates and early access details. You're not just a subscriber — you're a part of our journey from day one.
         </p>
         <p>
           If you have any questions or suggestions in the meantime, feel free to reply to this email.
